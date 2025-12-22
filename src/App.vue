@@ -1,4 +1,8 @@
 <template>
+  <!-- 全屏过渡动画组件 -->
+  <Transition name="fullscreen-fade">
+    <div class="fullscreen-transition"></div>
+  </Transition>
   <div class="main-container">
     <section class="home section-column" id="home">
       <nav class="navbar glass">
@@ -132,7 +136,7 @@
 
 <script setup>
 import LanguageSwitcher from "./components/LanguageSwitcher.vue";
-import { onMounted } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 
 const year = new Date().getFullYear();
 
@@ -142,7 +146,22 @@ onMounted(() => {
   setTimeout(() => {
     startScrollAnimation();
   }, 100);
+  window.addEventListener("language-changed", handleLanguageChanged);
 });
+
+// 组件卸载时移除事件监听，防止内存泄漏
+onUnmounted(() => {
+  window.removeEventListener("language-changed", handleLanguageChanged);
+});
+
+// 监听自定义事件
+const handleLanguageChanged = (event) => {
+  const fullscreen = document.querySelectorAll(".fullscreen-transition");
+  fullscreen[0].classList.add("transition-animation");
+  setTimeout(() => {
+    fullscreen[0].classList.remove("transition-animation");
+  }, 1000);
+};
 
 // 滚动动画的主要函数
 function startScrollAnimation() {
@@ -180,6 +199,16 @@ function startScrollAnimation() {
 <style scoped>
 * {
   color: rgb(228, 228, 228);
+}
+
+.fullscreen-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999; /* 确保置于所有内容之上 */
+  pointer-events: none; /* 允许下方内容被点击（虽然被遮住） */
 }
 
 .main-welcome {
@@ -451,6 +480,22 @@ function startScrollAnimation() {
   }
 }
 
+@keyframes transition {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
 .showup {
   opacity: 0;
 }
@@ -459,5 +504,9 @@ function startScrollAnimation() {
   opacity: 1;
   animation: showup 0.8s;
   position: relative;
+}
+
+.transition-animation {
+  animation: transition 1s;
 }
 </style>

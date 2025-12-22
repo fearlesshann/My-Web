@@ -30,8 +30,6 @@ const supportedLanguages = ref([
 
 const changeLanguage = () => {
   const langCode = locale.value === "en-US" ? "zh-CN" : "en-US";
-  locale.value = langCode;
-  localStorage.setItem("user-locale", langCode);
 
   // 可选：触发自定义事件，让其他组件知道语言已变化
   window.dispatchEvent(
@@ -39,6 +37,11 @@ const changeLanguage = () => {
       detail: { locale: langCode },
     })
   );
+
+  setTimeout(() => {
+    locale.value = langCode;
+    localStorage.setItem("user-locale", langCode);
+  }, 500);
 };
 </script>
 
