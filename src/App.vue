@@ -92,12 +92,13 @@
       <div class="main-job showup">
         <p>{{ $t("home.jobTitle") }}</p>
       </div>
+      <!-- 向下滚动提示箭头 -->
       <div class="scroll-notice">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="45"
           height="45"
-          fill="rgb(228, 228, 228)"
+          fill="rgb(178, 13, 49, 0.8)"
           viewBox="0 0 256 256"
         >
           <path
@@ -353,7 +354,7 @@ function startScrollAnimation() {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(15px);
+    transform: translateY(20px);
   }
   100% {
     transform: translateY(0);
@@ -364,10 +365,6 @@ function startScrollAnimation() {
   position: absolute;
   bottom: 5%;
   animation: updown 2s infinite;
-}
-
-.scroll-notice svg {
-  fill: rgb(178, 13, 49);
 }
 
 .about-me {
