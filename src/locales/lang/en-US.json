@@ -1,0 +1,24 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "error": "An error occurred"
+  },
+  "navbar": {
+    "home": "Home",
+    "aboutMe": "About Me",
+    "categories": "Categories",
+    "about": "About",
+    "search": "Search",
+    "toggleLanguage": "Toggle Language"
+  },
+  "home": {
+    "welcome": "WELCOME TO MY WEBSITE",
+    "jobTitle": "I'm Ye Han, a professional backend-developer",
+    "category": "Category",
+    "tags": "Tags",
+    "prevPost": "Previous Post",
+    "nextPost": "Next Post"
+  }
+}

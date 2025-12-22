@@ -1,0 +1,24 @@
+{
+  "common": {
+    "save": "保存",
+    "cancel": "取消",
+    "loading": "加载中...",
+    "error": "发生错误"
+  },
+  "navbar": {
+    "home": "首页",
+    "aboutMe": "简介",
+    "categories": "分类",
+    "about": "关于",
+    "search": "搜索",
+    "toggleLanguage": "切换语言"
+  },
+  "home": {
+    "welcome": "嗨👋欢迎来到我的个人网站",
+    "jobTitle": "我是叶寒，一名后端工程师",
+    "info": "passion for creatiniaho你好W我是叶寒一名后端工程师ng hello, I am<br/>YeHan, a software developer with bra passion for creating",
+    "tags": "标签",
+    "prevPost": "上一篇",
+    "nextPost": "下一篇"
+  }
+}
