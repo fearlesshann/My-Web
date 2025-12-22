@@ -8,10 +8,9 @@
   "navbar": {
     "home": "Home",
     "aboutMe": "About Me",
-    "categories": "Categories",
-    "about": "About",
-    "search": "Search",
-    "toggleLanguage": "Toggle Language"
+    "skill": "Skill",
+    "blog": "Blog",
+    "contacts": "Contacts"
   },
   "home": {
     "welcome": "WELCOME TO MY WEBSITE",

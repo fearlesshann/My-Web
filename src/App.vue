@@ -1,8 +1,8 @@
 <template>
   <!-- 全屏过渡动画组件 -->
-  <Transition name="fullscreen-fade">
+  <div name="fullscreen-fade">
     <div class="fullscreen-transition"></div>
-  </Transition>
+  </div>
   <div class="main-container">
     <section class="home section-column" id="home">
       <nav class="navbar glass">
@@ -14,10 +14,15 @@
           <li>
             <a href="#about-me">{{ $t("navbar.aboutMe") }}</a>
           </li>
-          <li><a href="#my-skill">技能</a></li>
-          <li><a href="#my-experience">经历</a></li>
-          <li><a href="#my-project">项目</a></li>
-          <li><a href="#my-contacts">联系</a></li>
+          <li>
+            <a href="#my-skill">{{ $t("navbar.skill") }}</a>
+          </li>
+          <li>
+            <a href="#my-blog">{{ $t("navbar.blog") }}</a>
+          </li>
+          <li>
+            <a href="#my-contacts">{{ $t("navbar.contacts") }}</a>
+          </li>
           <li>
             <LanguageSwitcher />
           </li>
@@ -118,11 +123,7 @@
       </div>
     </section>
     <section class="my-skill section-column glass" id="my-skill"></section>
-    <section
-      class="my-experience section-column glass"
-      id="my-experience"
-    ></section>
-    <section class="my-project section-column glass" id="my-project"></section>
+    <section class="my-blog section-column glass" id="my-blog"></section>
     <section
       class="my-contacts section-column glass"
       id="my-contacts"
@@ -438,24 +439,19 @@ function startScrollAnimation() {
   background-color: rgba(204, 204, 204, 0.11);
 }
 
-.my-experience {
+.my-blog {
   height: 900px;
   background-color: rgba(39, 39, 39, 0.51);
-}
-
-.my-project {
-  height: 900px;
-  background-color: rgba(204, 204, 204, 0.11);
 }
 
 .my-contacts {
-  height: 600px;
-  background-color: rgba(39, 39, 39, 0.51);
+  height: 900px;
+  background-color: rgba(204, 204, 204, 0.11);
 }
 
 .footer {
   height: 100px;
-  background-color: rgba(204, 204, 204, 0.11);
+  background-color: rgba(39, 39, 39, 0.51);
 }
 
 .copyright {

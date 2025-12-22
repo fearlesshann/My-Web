@@ -8,10 +8,9 @@
   "navbar": {
     "home": "首页",
     "aboutMe": "简介",
-    "categories": "分类",
-    "about": "关于",
-    "search": "搜索",
-    "toggleLanguage": "切换语言"
+    "skill": "技能",
+    "blog": "博客",
+    "contacts": "联系方式"
   },
   "home": {
     "welcome": "嗨👋欢迎来到我的个人网站",
