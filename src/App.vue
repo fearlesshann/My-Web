@@ -332,6 +332,15 @@ function startScrollAnimation() {
   font-weight: 100;
 }
 
+.nav-menu li:active {
+  transform: scale(1);
+  font-weight: 100;
+}
+
+.nav-menu li a:active {
+  color: rgb(178, 13, 49);
+}
+
 /* 使用伪元素实现覆盖后的动态下划线 */
 .nav-menu li a::after {
   content: "";
