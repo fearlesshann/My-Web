@@ -7,21 +7,26 @@
     <section class="home section-column" id="home">
       <nav class="navbar glass">
         <img class="logo" src="./assets/logo.png" alt="Ye Han" />
-        <ul class="nav-menu">
+        <button class="nav-toggle" type="button" :class="{ open: isMenuOpen }" :aria-expanded="isMenuOpen" aria-label="Toggle navigation" @click="toggleMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-menu" :class="{ open: isMenuOpen }">
           <li>
-            <a href="#home">{{ $t("navbar.home") }}</a>
+            <a href="#home" @click="closeMenu">{{ $t("navbar.home") }}</a>
           </li>
           <li>
-            <a href="#about-me">{{ $t("navbar.aboutMe") }}</a>
+            <a href="#about-me" @click="closeMenu">{{ $t("navbar.aboutMe") }}</a>
           </li>
           <li>
-            <a href="#my-skill">{{ $t("navbar.skill") }}</a>
+            <a href="#my-skill" @click="closeMenu">{{ $t("navbar.skill") }}</a>
           </li>
           <li>
-            <a href="#my-blog">{{ $t("navbar.blog") }}</a>
+            <a href="#my-blog" @click="closeMenu">{{ $t("navbar.blog") }}</a>
           </li>
           <li>
-            <a href="#my-contacts">{{ $t("navbar.contacts") }}</a>
+            <a href="#my-contacts" @click="closeMenu">{{ $t("navbar.contacts") }}</a>
           </li>
           <li>
             <LanguageSwitcher />
@@ -170,9 +175,18 @@ const year = new Date().getFullYear();
 const ex = new Date().getFullYear() - 2021;
 let observer;
 let startHandle;
+const isMenuOpen = ref(false);
+
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+
+const closeMenu = () => {
+  isMenuOpen.value = false;
+};
 
 
-// 组件挂载后执�?
+// 组件挂载后执�?
 onMounted(() => {
   // Defer observer setup to idle time.
   if ("requestIdleCallback" in window) {
@@ -198,7 +212,7 @@ onUnmounted(() => {
   }
 });
 
-// 监听自定义事�?
+// 监听自定义事�?
 const handleLanguageChanged = () => {
   if (!fullscreenEl.value) return;
   fullscreenEl.value.classList.add("transition-animation");
@@ -208,7 +222,7 @@ const handleLanguageChanged = () => {
   }, 1000);
 };
 
-// 滚动动画的主要函�?
+// 滚动动画的主要函�?
 function startScrollAnimation() {
   // 1. 找到所有需要动画的元素
   const elements = document.querySelectorAll(".showup");
@@ -221,21 +235,21 @@ function startScrollAnimation() {
       entries.forEach((entry) => {
         // 如果元素出现在视窗里
         if (entry.isIntersecting) {
-          // 给元素添加动画类，触发动�?
+          // 给元素添加动画类，触发动�?
           entry.target.classList.add("showup-animation");
-          // 动画播完一次后，就不再观察这个元素�?
+          // 动画播完一次后，就不再观察这个元素�?
           observer.unobserve(entry.target);
         }
       });
     },
     // 观察器的配置
     {
-      threshold: 0.5, // 元素10%进入视窗就触�?
+      threshold: 0.5, // 元素10%进入视窗就触�?
       rootMargin: "0px 0px -50px 0px", // 底部提前50像素触发
     }
   );
 
-  // 3. 开始观察每个元�?
+  // 3. 开始观察每个元�?
   elements.forEach((element) => {
     observer.observe(element);
   });
@@ -243,6 +257,7 @@ function startScrollAnimation() {
 </script>
 
 <style scoped>
+
 * {
   color: rgb(228, 228, 228);
 }
@@ -283,6 +298,11 @@ h5,h3,p {
   fill: rgba(178, 13, 49, 0.8) !important;
 }
 
+
+.scroll-icon path {
+  fill: rgba(178, 13, 49, 0.8) !important;
+}
+
 .scroll-notice .scroll-icon path {
   fill: rgba(178, 13, 49, 0.8) !important;
 }
@@ -293,7 +313,7 @@ h5,h3,p {
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 9999; /* 确保置于所有内容之�?*/
+  z-index: 9999; /* 确保置于所有内容之�?*/
   pointer-events: none; /* 允许下方内容被点击（虽然被遮住） */
 }
 
@@ -310,7 +330,16 @@ h5,h3,p {
 .main-container {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
 
+.main-container::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background-image: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.35),
@@ -324,7 +353,12 @@ h5,h3,p {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed; /* 可选：固定背景 */
+}
+
+
+.home {
+  min-height: 100vh;
+  position: relative;
 }
 
 .logo {
@@ -352,13 +386,10 @@ h5,h3,p {
   padding: 0% 10%;
 }
 
-.home {
-  min-height: 100vh;
-  position: relative;
-}
+
 
 /* 毛玻璃导航栏 */
-.navbar {
+  .navbar {
   display: flex;
   align-items: center;
   position: fixed;
@@ -374,7 +405,7 @@ h5,h3,p {
   transition: all 0.3s ease;
 }
 
-.navbar p {
+  .navbar p {
   color: rgb(228, 228, 228);
   font-size: 1.5rem;
   font-weight: 700;
@@ -389,14 +420,47 @@ h5,h3,p {
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 2rem;
+  gap: 0.8rem;
   margin-left: auto;
-  height: 100%; /* 关键：让 ul 占满父容器高度，便于内部项对�?*/
+  height: 100%; /* 关键：让 ul 占满父容器高度，便于内部项对�?*/
 }
 
-/* 为所�?li，包括语言切换器，统一样式 */
+.nav-toggle {
+  display: none;
+  margin-left: auto;
+  width: 44px;
+  height: 36px;
+  border: 1px solid rgba(228, 228, 228, 0.35);
+  border-radius: 10px;
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 8px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: rgb(228, 228, 228);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.nav-toggle.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+/* 为所�?li，包括语言切换器，统一样式 */
 .nav-menu > li {
-  display: flex; /* �?li 本身也是 flex 容器 */
+  display: flex; /* �?li 本身也是 flex 容器 */
   align-items: center; /* 使其内容垂直居中 */
   height: 100%; /* li 高度撑满父级 ul */
   transition: transform 0.3s ease;
@@ -536,11 +600,15 @@ h5,h3,p {
 .my-introduction {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 0.8rem;
   color: rgb(228, 228, 228);
   font-size: 1.3rem;
   font-weight: 400;
   width: 35%;
+}
+
+.my-introduction h5 {
+  margin: 0 0 8px;
 }
 
 .my-skill {
@@ -640,7 +708,7 @@ h5,h3,p {
   color: rgba(228, 228, 228, 0.753);
 }
 
-/*************************************** 装饰�?*****************************************/
+/*************************************** 装饰�?*****************************************/
 @keyframes showup {
   0% {
     opacity: 0;
@@ -687,10 +755,236 @@ h5,h3,p {
 .transition-animation {
   animation: transition 1s;
 }
-
 @media (max-width: 768px) {
-  .main-container {
+  .footer .copyright {
+    font-size: 0.85rem;
+  }
+  .main-container::before {
     background-attachment: scroll;
   }
+
+  .navbar {
+    padding: 10px 16px;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 64px;
+    right: 16px;
+    left: 16px;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    margin-left: 0;
+    height: auto;
+    background: rgba(20, 20, 20, 0.75);
+    border: 1px solid rgba(228, 228, 228, 0.1);
+    border-radius: 16px;
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .nav-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-menu li:hover {
+    transform: none;
+  }
+
+  .main-welcome {
+    font-size: 28px;
+    padding: 10px 24px;
+    letter-spacing: 4px;
+  }
+
+  .main-contact ul {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .main-job {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+
+  .about-me {
+    flex-direction: column;
+    height: auto;
+    padding: 40px 8%;
+    gap: 32px;
+  }
+
+  .my-picture {
+    width: 70%;
+    height: auto;
+    margin-bottom: 24px;
+  }
+
+  .my-picture img {
+    width: 100%;
+    height: auto;
+  }
+
+  .my-introduction {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  color: rgb(228, 228, 228);
+  font-size: 1.3rem;
+  font-weight: 400;
+  width: 35%;
+}
+
+.my-introduction h5 {
+  margin: 0 0 8px;
+}
+
+.my-skill {
+    height: auto;
+    padding: 40px 8%;
+  }
+
+  .my-skill-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .skill-item {
+    width: 100%;
+    gap: 10px;
+    padding: 12px 0;
+  }
+
+  .my-blog,
+  .my-contacts {
+    height: auto;
+    padding: 40px 8%;
+  }
+
+  .footer {
+    height: auto;
+    padding: 20px 8%;
+    text-align: center;
+  }
+  .my-introduction {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .footer .copyright {
+    font-size: 0.78rem;
+  }
+  .navbar {
+    padding: 8px 12px;
+  }
+
+  .logo {
+    width: 32px;
+  }
+
+  .nav-menu {
+    top: 56px;
+    left: 12px;
+    right: 12px;
+    padding: 14px;
+  }
+
+  .main-welcome {
+    font-size: 22px;
+    padding: 8px 18px;
+    letter-spacing: 3px;
+  }
+
+  .main-contact ul {
+    gap: 10px;
+  }
+
+  .main-contact li {
+    margin: 0;
+  }
+
+  .scroll-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .main-job {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+
+  .about-me,
+  .my-skill,
+  .my-blog,
+  .my-contacts {
+    padding: 28px 6%;
+  }
+
+  .my-skill-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .my-introduction {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  color: rgb(228, 228, 228);
+  font-size: 1.3rem;
+  font-weight: 400;
+  width: 35%;
+}
+
+.my-introduction h5 {
+  margin: 0 0 8px;
+}
+
+.hardSkills,
+  .bonusSkills {
+    font-size: 18px;
+  }
+
+  .skill-item .skill-name {
+    font-size: 0.9rem;
+  }
+
+  .my-skill-grid .skill-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .my-introduction {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
 }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
