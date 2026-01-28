@@ -1,38 +1,57 @@
-# My-Web
+﻿# My-Web
 
-This template should help get you started developing with Vue 3 in Vite.
+个人主页/作品集项目，基于 Vue 3 + Vite 构建，包含多语言、玻璃质感 UI、滚动动画和移动端适配。
 
-## Recommended IDE Setup
+## 功能与特点
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- CI/CD 友好：标准 Vite 构建流程，适合接入 GitHub Actions 等自动化部署
+- 单页结构：Home / About / Skills / Blog / Contacts / Footer
+- 语言切换（zh-CN / en-US）
+- 玻璃拟态（glassmorphism）背景层与动效
+- 滚动进入动画（IntersectionObserver）
+- 图片使用 AVIF/WebP/JPEG 回退以提升加载性能
+- 移动端响应式布局与折叠导航
 
-## Recommended Browser Setup
+## 技术栈
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- Vue 3
+- Vite
+- vue-i18n
 
-## Customize configuration
+## 目录结构
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+```
+my-web/
+  src/
+    assets/        # 图片与静态资源
+    components/    # 组件
+    locales/       # 多语言配置
+    App.vue        # 页面主体
+    main.js        # 应用入口
+  public/          # 公共资源
+  index.html
 ```
 
-### Compile and Hot-Reload for Development
+## 环境要求
 
-```sh
+- Node.js: ^20.19.0 或 >= 22.12.0
+
+## 本地开发
+
+```bash
+npm install
 npm run dev
 ```
 
-### Compile and Minify for Production
+## 构建与预览
 
-```sh
+```bash
 npm run build
+npm run preview
 ```
+
+## 部署
+
+构建产物在 `dist/`，将其部署到任意静态站点服务即可。
+
+

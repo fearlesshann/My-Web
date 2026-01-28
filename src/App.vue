@@ -184,7 +184,7 @@ const closeMenu = () => {
 };
 
 
-// 组件挂载后执�?
+// 组件挂载后执�?
 onMounted(() => {
   // Defer observer setup to idle time.
   if ("requestIdleCallback" in window) {
@@ -210,7 +210,7 @@ onUnmounted(() => {
   }
 });
 
-// 监听自定义事�?
+// 监听自定义事�?
 const handleLanguageChanged = () => {
   if (!fullscreenEl.value) return;
   fullscreenEl.value.classList.add("transition-animation");
@@ -220,7 +220,7 @@ const handleLanguageChanged = () => {
   }, 1000);
 };
 
-// 滚动动画的主要函�?
+// 滚动动画的主要函�?
 function startScrollAnimation() {
   // 1. 找到所有需要动画的元素
   const elements = document.querySelectorAll(".showup");
@@ -233,21 +233,21 @@ function startScrollAnimation() {
       entries.forEach((entry) => {
         // 如果元素出现在视窗里
         if (entry.isIntersecting) {
-          // 给元素添加动画类，触发动�?
+          // 给元素添加动画类，触发动�?
           entry.target.classList.add("showup-animation");
-          // 动画播完一次后，就不再观察这个元素�?
+          // 动画播完一次后，就不再观察这个元素�?
           observer.unobserve(entry.target);
         }
       });
     },
     // 观察器的配置
     {
-      threshold: 0.5, // 元素10%进入视窗就触�?
+      threshold: 0.5, // 元素10%进入视窗就触�?
       rootMargin: "0px 0px -50px 0px", // 底部提前50像素触发
     }
   );
 
-  // 3. 开始观察每个元�?
+  // 3. 开始观察每个元�?
   elements.forEach((element) => {
     observer.observe(element);
   });
@@ -313,7 +313,7 @@ h5,h3,p {
   height: 100vh;
   height: 100svh;
   height: 100dvh;
-  z-index: 9999; /* 确保置于所有内容之�?*/
+  z-index: 9999; /* 确保置于所有内容之�?*/
   pointer-events: none; /* 允许下方内容被点击（虽然被遮住） */
 }
 
@@ -424,7 +424,7 @@ h5,h3,p {
   list-style: none;
   gap: 0.8rem;
   margin-left: auto;
-  height: 100%; /* 关键：让 ul 占满父容器高度，便于内部项对�?*/
+  height: 100%; /* 关键：让 ul 占满父容器高度，便于内部项对�?*/
 }
 
 .nav-toggle {
@@ -460,9 +460,9 @@ h5,h3,p {
 .nav-toggle.open span:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
 }
-/* 为所�?li，包括语言切换器，统一样式 */
+/* 为所�?li，包括语言切换器，统一样式 */
 .nav-menu > li {
-  display: flex; /* �?li 本身也是 flex 容器 */
+  display: flex; /* �?li 本身也是 flex 容器 */
   align-items: center; /* 使其内容垂直居中 */
   height: 100%; /* li 高度撑满父级 ul */
   transition: transform 0.3s ease;
@@ -710,7 +710,7 @@ h5,h3,p {
   color: rgba(228, 228, 228, 0.753);
 }
 
-/*************************************** 装饰�?*****************************************/
+/*************************************** 装饰�?*****************************************/
 @keyframes showup {
   0% {
     opacity: 0;
