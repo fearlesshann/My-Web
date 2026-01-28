@@ -313,6 +313,8 @@ h5,h3,p {
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100svh;
+  height: 100dvh;
   z-index: 9999; /* 确保置于所有内容之�?*/
   pointer-events: none; /* 允许下方内容被点击（虽然被遮住） */
 }
@@ -358,6 +360,8 @@ h5,h3,p {
 
 .home {
   min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
   position: relative;
 }
 
@@ -976,6 +980,7 @@ h5,h3,p {
 
 }
 </style>
+
 
 
 
