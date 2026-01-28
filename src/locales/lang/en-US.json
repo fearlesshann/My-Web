@@ -9,15 +9,36 @@
     "home": "Home",
     "aboutMe": "About Me",
     "skill": "Skill",
-    "blog": "Blog",
+    "blog": "Experience",
     "contacts": "Contacts"
   },
   "home": {
     "welcome": "WELCOME TO MY WEBSITE",
-    "jobTitle": "I'm Ye Han, a professional backend-developer",
+    "jobTitle": "I'm Ye Han, a professional Software Engineer",
     "category": "Category",
+    "info": "Hello, I am Ye Han, a Software Engineer",
+    "info1": "I specialize in industrial informatization, with ",
+    "info2": " years extensive expertise in the development of MES (Manufacturing Execution Systems) and WMS (Warehouse Management Systems). My core technical stack includes C#, ASP.NET Core, Vue, and SQL Server.",
+    "info3": "Throughout my career, I have excelled at handling complex business logic and quickly responding to on-site requirements. I am adept at bridging the gap between technical systems and production workflows through efficient design and system optimizations, ensuring that software solutions align perfectly with operational needs.",
     "tags": "Tags",
     "prevPost": "Previous Post",
     "nextPost": "Next Post"
+  },
+  "skills": {
+    "hardSkills": "Hard Skills",
+    "years": " Years",
+    "bonusSkills": "Bonus Skills",
+    "rabbitmq": "RabbitMQ",
+    "redis": "Redis",
+    "git": "Git",
+    "github": "Github",
+    "html": "HTML",
+    "css": "CSS",
+    "linux": "Linux",
+    "docker": "Docker",
+    "nginx": "Nginx",
+    "nodejs": "Node JS",
+    "cicd": "CI/CD",
+    "unitTest": "Unit Test"
   }
 }

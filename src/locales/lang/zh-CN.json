@@ -9,15 +9,35 @@
     "home": "首页",
     "aboutMe": "简介",
     "skill": "技能",
-    "blog": "博客",
+    "blog": "经历",
     "contacts": "联系方式"
   },
   "home": {
     "welcome": "嗨👋欢迎来到我的个人网站",
-    "jobTitle": "我是叶寒，一名后端工程师",
-    "info": "passion for creatiniaho你好W我是叶寒一名后端工程师ng hello, I am<br/>YeHan, a software developer with bra passion for creating",
+    "jobTitle": "我是叶寒，一名软件工程师",
+    "info": "你好，我叫叶寒，是一名软件工程师。",
+    "info1": "目前我已有近 ",
+    "info2": " 年的软件开发经验，主要技术栈为 C#、ASP.NET Core、Vue 以及 SQL Server",
+    "info3": "在职业生涯中，我长期深耕于工业信息化领域，专注于 MES（制造执行系统）与 WMS（仓库管理系统）的设计与开发。我非常擅长处理复杂的业务逻辑，能够快速响应生产现场的各种需求，确保系统与业务流程的高效匹配。",
     "tags": "标签",
     "prevPost": "上一篇",
     "nextPost": "下一篇"
+  },
+  "skills": {
+    "hardSkills": "主要技能",
+    "years": "年",
+    "bonusSkills": "附加技能",
+    "rabbitmq": "RabbitMQ",
+    "redis": "Redis",
+    "git": "Git",
+    "github": "Github",
+    "html": "HTML",
+    "css": "CSS",
+    "linux": "Linux",
+    "docker": "Docker",
+    "nginx": "Nginx",
+    "nodejs": "Node JS",
+    "cicd": "CI/CD",
+    "unitTest": "Unit Test"
   }
 }
