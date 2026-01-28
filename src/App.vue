@@ -28,9 +28,7 @@
           <li>
             <a href="#my-contacts" @click="closeMenu">{{ $t("navbar.contacts") }}</a>
           </li>
-          <li>
-            <LanguageSwitcher />
-          </li>
+          <li @click="closeMenu"><LanguageSwitcher /></li>
         </ul>
       </nav>
       <div class="main-title showup">
@@ -980,6 +978,10 @@ h5,h3,p {
 
 }
 </style>
+
+
+
+
 
 
 
