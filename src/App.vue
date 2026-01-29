@@ -452,6 +452,7 @@ h5,h3,p {
 }
 
 .main-welcome {
+  text-align: center;
   letter-spacing: 10px;
   font-size: 50px;
   font-weight: 500;
