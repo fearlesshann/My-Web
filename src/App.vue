@@ -222,7 +222,7 @@
         <p class="section-subtitle">{{ $t("contacts.subtitle") }}</p>
       </div>
       <div class="contacts-grid showup">
-        <a class="contact-card" :href="$t('contacts.email.href')">
+        <a class="contact-card" :href="contactEmailHref">
           <span class="contact-icon-wrap">
             <svg class="icon contact-icon" viewBox="0 0 64 64" aria-hidden="true">
               <path d="M63.125,9.977c-0.902-1.321-2.419-2.194-4.131-2.194H5.006c-1.676,0-3.158,0.842-4.067,2.117l31.16,25.982L63.125,9.977z"/>
@@ -231,12 +231,12 @@
           </span>
           <div class="contact-info">
             <p class="contact-label">{{ $t("contacts.email.label") }}</p>
-            <p class="contact-value">{{ $t("contacts.email.value") }}</p>
+            <p class="contact-value">{{ contactEmail }}</p>
           </div>
           <button
             class="contact-copy"
             type="button"
-            @click.stop.prevent="copyContact('email', $t('contacts.email.value'))"
+            @click.stop.prevent="copyContact('email', contactEmail)"
           >
             {{ copiedKey === "email" ? $t("contacts.copied") : $t("contacts.copy") }}
           </button>
@@ -296,7 +296,7 @@ const year = new Date().getFullYear();
 const ex = new Date().getFullYear() - 2021;
 let observer;
 const isMenuOpen = ref(false);
-const { tm } = useI18n();
+const { tm, t } = useI18n();
 const emptyExperience = {
   head: { kicker: "", title: "", subtitle: "" },
   work: { label: "", items: [] },
@@ -306,6 +306,10 @@ const experience = computed(() => {
   const data = tm("experience");
   return data && typeof data === "object" ? data : emptyExperience;
 });
+const normalizeEmail = (value) =>
+  value.replace("(at)", "@").replace("[at]", "@");
+const contactEmail = computed(() => normalizeEmail(t("contacts.email.value")));
+const contactEmailHref = computed(() => `mailto:${contactEmail.value}`);
 const copiedKey = ref(null);
 let copiedTimer;
 

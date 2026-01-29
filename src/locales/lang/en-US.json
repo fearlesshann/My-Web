@@ -157,8 +157,8 @@
     "copied": "Copied",
     "email": {
       "label": "Email",
-      "value": "mr.yehan@@outlook.com",
-      "href": "mailto:mr.yehan@@outlook.com"
+      "value": "mr.yehan(at)outlook.com",
+      "href": "mailto:mr.yehan(at)outlook.com"
     },
     "phone": {
       "label": "Phone",
