@@ -1018,7 +1018,7 @@ h5,h3,p {
 
 .contact-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(178, 13, 49, 0.5);
+  border-color: rgb(178, 13, 49);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
 }
 
@@ -1029,8 +1029,6 @@ h5,h3,p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(178, 13, 49, 0.15);
-  border: 1px solid rgba(178, 13, 49, 0.3);
 }
 
 .contact-info {
@@ -1070,7 +1068,7 @@ h5,h3,p {
 }
 
 .contact-copy:hover {
-  border-color: rgba(178, 13, 49, 0.6);
+  border-color: rgb(178, 13, 49);
   color: rgb(178, 13, 49);
   background: rgba(178, 13, 49, 0.12);
 }
