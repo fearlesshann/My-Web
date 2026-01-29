@@ -31,10 +31,10 @@
           <li @click="closeMenu"><LanguageSwitcher /></li>
         </ul>
       </nav>
-      <LazyReveal tag="div" class="main-title">
+      <div class="main-title showup">
         <h1 class="main-welcome">{{ $t("home.welcome") }}</h1>
-      </LazyReveal>
-      <LazyReveal tag="div" class="main-contact">
+      </div>
+      <div class="main-contact showup">
         <ul>
           <li>
             <a class="mail" href="mailto:mr.yehan@outlook.com">
@@ -63,10 +63,10 @@
             </a>
           </li>
         </ul>
-      </LazyReveal>
-      <LazyReveal tag="div" class="main-job">
+      </div>
+      <div class="main-job showup">
         <p>{{ $t("home.jobTitle") }}</p>
-      </LazyReveal>
+      </div>
       <!-- 向下滚动提示箭头 -->
       <div class="scroll-notice">
         <svg class="icon scroll-icon" viewBox="0 0 256 256" aria-hidden="true">
@@ -75,24 +75,22 @@
       </div>
     </section>
     <section class="about-me section-row glass" id="about-me">
-      <LazyReveal tag="div" class="my-picture">
+      <div class="my-picture showup">
         <picture>
           <source srcset="./assets/me.avif" type="image/avif" />
           <source srcset="./assets/me.webp" type="image/webp" />
           <img src="./assets/me.jpg" alt="YeHan" loading="lazy" decoding="async" />
         </picture>
-      </LazyReveal>
-      <LazyReveal tag="div" class="my-introduction">
+      </div>
+      <div class="my-introduction showup">
         <h5>{{ $t("home.info") }}</h5>
         <h5>{{ $t("home.info1") }}{{ ex }}{{ $t("home.info2") }}</h5>
         <h5>{{ $t("home.info3") }}</h5>
-      </LazyReveal>
+      </div>
     </section>
     <section class="my-skill section-column glass" id="my-skill">
-      <LazyReveal tag="div" class="my-skill-part">
-        <p class="hardSkills">{{ $t("skills.hardSkills") }}</p>
-      </LazyReveal>
-      <LazyReveal tag="div" class="my-skill-part my-skill-grid">
+      <div class="my-skill-part showup"><p class="hardSkills">{{ $t("skills.hardSkills") }}</p></div>
+      <div class="my-skill-part showup my-skill-grid">
         <div title="C#" class="skill-item">
           <svg class="skill-icon" aria-hidden="true">
             <use href="#icon-csharp"></use>
@@ -113,11 +111,9 @@
             <use href="#icon-vue"></use>
           </svg><h3 class="skill-name">{{ ex - 1 + '+ ' + $t("skills.years") }}</h3>
         </div>
-      </LazyReveal>
-      <LazyReveal tag="div" class="my-skill-part">
-        <p class="bonusSkills">{{ $t("skills.bonusSkills") }}</p>
-      </LazyReveal>
-      <LazyReveal tag="div" class="my-skill-part my-skill-grid">
+      </div>
+      <div class="my-skill-part showup"><p class="bonusSkills">{{ $t("skills.bonusSkills") }}</p></div>
+      <div class="my-skill-part showup my-skill-grid">
         <div class="skill-item">
           <svg class="skill-icon" aria-hidden="true"><use href="#icon-rabbitmq"></use></svg><h3 class="skill-name">{{ $t("skills.rabbitmq") }}</h3>
         </div>
@@ -154,42 +150,39 @@
         <div class="skill-item">
           <svg class="skill-icon" aria-hidden="true"><use href="#icon-unit-test"></use></svg><h3 class="skill-name">{{ $t("skills.unitTest") }}</h3>
         </div>
-      </LazyReveal>
+      </div>
     </section>
     <section class="my-blog section-column glass" id="my-blog">
-      <LazyReveal tag="div" class="my-blog-head">
+      <div class="my-blog-head showup">
         <p class="section-kicker">{{ experience.head.kicker }}</p>
         <h2 class="section-title">{{ experience.head.title }}</h2>
         <p class="section-subtitle">{{ experience.head.subtitle }}</p>
-      </LazyReveal>
+      </div>
       <div class="timeline-wrapper">
         <div class="timeline-block">
           <div class="timeline-block-title">
             <span class="timeline-tag">{{ experience.work.label }}</span>
           </div>
           <div class="timeline-list">
-            <div
+            <article
               v-for="(item, index) in experience.work.items"
               :key="`work-${index}`"
-              class="timeline-sentinel"
-              :ref="setLazyRef('work', index)"
+              class="timeline-item showup"
             >
-              <article v-if="workVisible[index]" class="timeline-item showup-animation">
-                <span class="timeline-dot"></span>
-                <div class="timeline-card">
-                  <div class="timeline-meta">
-                    <span class="timeline-date">{{ item.date }}</span>
-                    <span class="timeline-role">{{ item.role }}</span>
-                  </div>
-                  <h3 class="timeline-company">{{ item.company }}</h3>
-                  <ul class="timeline-points">
-                    <li v-for="(point, pIndex) in item.points" :key="`work-point-${index}-${pIndex}`">
-                      {{ point }}
-                    </li>
-                  </ul>
+              <span class="timeline-dot"></span>
+              <div class="timeline-card">
+                <div class="timeline-meta">
+                  <span class="timeline-date">{{ item.date }}</span>
+                  <span class="timeline-role">{{ item.role }}</span>
                 </div>
-              </article>
-            </div>
+                <h3 class="timeline-company">{{ item.company }}</h3>
+                <ul class="timeline-points">
+                  <li v-for="(point, pIndex) in item.points" :key="`work-point-${index}-${pIndex}`">
+                    {{ point }}
+                  </li>
+                </ul>
+              </div>
+            </article>
           </div>
         </div>
         <div class="timeline-block">
@@ -197,27 +190,24 @@
             <span class="timeline-tag">{{ experience.projects.label }}</span>
           </div>
           <div class="timeline-list">
-            <div
+            <article
               v-for="(item, index) in experience.projects.items"
               :key="`project-${index}`"
-              class="timeline-sentinel"
-              :ref="setLazyRef('project', index)"
+              class="timeline-item showup"
             >
-              <article v-if="projectVisible[index]" class="timeline-item showup-animation">
-                <span class="timeline-dot"></span>
-                <div class="timeline-card">
-                  <div class="timeline-meta">
-                    <span class="timeline-date">{{ item.date }}</span>
-                    <span class="timeline-role">{{ item.role }}</span>
-                  </div>
-                  <ul class="timeline-points">
-                    <li v-for="(point, pIndex) in item.points" :key="`project-point-${index}-${pIndex}`">
-                      {{ point }}
-                    </li>
-                  </ul>
+              <span class="timeline-dot"></span>
+              <div class="timeline-card">
+                <div class="timeline-meta">
+                  <span class="timeline-date">{{ item.date }}</span>
+                  <span class="timeline-role">{{ item.role }}</span>
                 </div>
-              </article>
-            </div>
+                <ul class="timeline-points">
+                  <li v-for="(point, pIndex) in item.points" :key="`project-point-${index}-${pIndex}`">
+                    {{ point }}
+                  </li>
+                </ul>
+              </div>
+            </article>
           </div>
         </div>
       </div>
@@ -226,12 +216,12 @@
       class="my-contacts section-column glass"
       id="my-contacts"
     >
-      <LazyReveal tag="div" class="my-contacts-head">
+      <div class="my-contacts-head showup">
         <p class="section-kicker">{{ $t("contacts.kicker") }}</p>
         <h2 class="section-title">{{ $t("contacts.title") }}</h2>
         <p class="section-subtitle">{{ $t("contacts.subtitle") }}</p>
-      </LazyReveal>
-      <LazyReveal tag="div" class="contacts-grid">
+      </div>
+      <div class="contacts-grid showup">
         <a class="contact-card" :href="$t('contacts.email.href')">
           <span class="contact-icon-wrap">
             <svg class="icon contact-icon" viewBox="0 0 64 64" aria-hidden="true">
@@ -287,7 +277,7 @@
             {{ copiedKey === "github" ? $t("contacts.copied") : $t("contacts.copy") }}
           </button>
         </a>
-      </LazyReveal>
+      </div>
     </section>
     <section class="footer section-column glass" id="footer">
       <p class="copyright">Copyright © {{ year }} by YeHan</p>
@@ -298,14 +288,13 @@
 
 <script setup>
 import LanguageSwitcher from "./components/LanguageSwitcher.vue";
-import LazyReveal from "./components/LazyReveal.vue";
-import { computed, nextTick, onMounted, onUnmounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 const fullscreenEl = ref(null);
 const year = new Date().getFullYear();
 const ex = new Date().getFullYear() - 2021;
-let lazyObserver;
+let observer;
 const isMenuOpen = ref(false);
 const { tm } = useI18n();
 const emptyExperience = {
@@ -317,10 +306,6 @@ const experience = computed(() => {
   const data = tm("experience");
   return data && typeof data === "object" ? data : emptyExperience;
 });
-const workVisible = ref([]);
-const projectVisible = ref([]);
-const workRefs = [];
-const projectRefs = [];
 const copiedKey = ref(null);
 let copiedTimer;
 
@@ -332,63 +317,6 @@ const closeMenu = () => {
   isMenuOpen.value = false;
 };
 
-const setLazyRef = (type, index) => (el) => {
-  if (!el) return;
-  if (type === "work") {
-    workRefs[index] = el;
-  } else {
-    projectRefs[index] = el;
-  }
-};
-
-const initLazyExperience = () => {
-  const workItems = experience.value?.work?.items || [];
-  const projectItems = experience.value?.projects?.items || [];
-  workVisible.value = workItems.map(() => false);
-  projectVisible.value = projectItems.map(() => false);
-
-  if (lazyObserver) {
-    lazyObserver.disconnect();
-  }
-
-  if (!("IntersectionObserver" in window)) {
-    workVisible.value = workItems.map(() => true);
-    projectVisible.value = projectItems.map(() => true);
-    return;
-  }
-
-  lazyObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const type = entry.target.dataset.type;
-        const index = Number(entry.target.dataset.index);
-        if (type === "work") {
-          workVisible.value[index] = true;
-        } else if (type === "project") {
-          projectVisible.value[index] = true;
-        }
-        lazyObserver.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
-  );
-
-  nextTick(() => {
-    workRefs.forEach((el, index) => {
-      if (!el) return;
-      el.dataset.type = "work";
-      el.dataset.index = String(index);
-      lazyObserver.observe(el);
-    });
-    projectRefs.forEach((el, index) => {
-      if (!el) return;
-      el.dataset.type = "project";
-      el.dataset.index = String(index);
-      lazyObserver.observe(el);
-    });
-  });
-};
 
 const copyContact = async (key, value) => {
   if (!value) return;
@@ -409,7 +337,7 @@ const copyContact = async (key, value) => {
 
 // 组件挂载后执�?
 onMounted(() => {
-  initLazyExperience();
+  startScrollAnimation();
   window.addEventListener("language-changed", handleLanguageChanged);
 });
 
@@ -419,8 +347,8 @@ onUnmounted(() => {
   if (copiedTimer) {
     clearTimeout(copiedTimer);
   }
-  if (lazyObserver) {
-    lazyObserver.disconnect();
+  if (observer) {
+    observer.disconnect();
   }
 });
 
@@ -432,8 +360,27 @@ const handleLanguageChanged = () => {
     if (!fullscreenEl.value) return;
     fullscreenEl.value.classList.remove("transition-animation");
   }, 1000);
-  initLazyExperience();
 };
+
+function startScrollAnimation() {
+  const elements = document.querySelectorAll(".showup");
+  if (!elements.length) return;
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("showup-animation");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.5,
+      rootMargin: "0px 0px -50px 0px",
+    }
+  );
+  elements.forEach((element) => observer.observe(element));
+}
 
 </script>
 
@@ -939,10 +886,6 @@ h5,h3,p {
   gap: 26px;
 }
 
-.timeline-sentinel {
-  position: relative;
-  min-height: 120px;
-}
 
 .timeline-list::before {
   content: "";
@@ -1210,14 +1153,20 @@ h5,h3,p {
   }
 }
 
-:deep(.showup-animation) {
+.showup {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.showup-animation {
   opacity: 1;
   animation: showup 0.8s;
   position: relative;
+  visibility: visible;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :deep(.showup-animation) {
+  .showup-animation {
     opacity: 1;
     transform: none;
   }
