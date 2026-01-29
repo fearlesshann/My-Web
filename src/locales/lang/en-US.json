@@ -40,5 +40,135 @@
     "nodejs": "Node JS",
     "cicd": "CI/CD",
     "unitTest": "Unit Test"
+  },
+  "experience": {
+    "head": {
+      "kicker": "Experience",
+      "title": "Experience",
+      "subtitle": "Focused on MES/WMS, industrial systems, and high-concurrency architecture."
+    },
+    "work": {
+      "label": "Work Experience",
+      "items": [
+        {
+          "date": "2025.09 - Present",
+          "role": "Software Engineer (Core Development)",
+          "company": "Rongdi Intelligent Technology",
+          "points": [
+            "Responsibilities: iterate core business engines for MES and WMS systems and upgrade foundational architecture.",
+            "Technical challenge: stability governance and high-frequency database read/write optimization for 24/7 factory operations."
+          ]
+        },
+        {
+          "date": "2024.12 - 2025.08",
+          "role": "WMS Development Lead",
+          "company": "Changshu Yongqiang Machinery",
+          "points": [
+            "Responsibilities: built the WMS system from 0 to 1, covering business modeling, architecture selection, and standards.",
+            "Team leadership: led a 3-5 member team for requirement breakdown, code review, and cross-department coordination."
+          ]
+        },
+        {
+          "date": "2024.06 - 2024.11",
+          "role": "Software Engineer",
+          "company": "Wuxi Lead Intelligent Equipment Co., Ltd.",
+          "points": [
+            "Responsibilities: new module design for WMS in the new energy equipment industry and database performance optimization under high concurrency.",
+            "Core work: solved complex logistics cost-calculation algorithms to improve analytics on massive data volumes."
+          ]
+        },
+        {
+          "date": "2023.05 - 2024.06",
+          "role": "Development Lead / Software Engineer",
+          "company": "Guan Cheng Information Technology (Suzhou) Co., Ltd.",
+          "points": [
+            "Responsibilities: led technical solution design for multiple medical industry projects, participated in early blueprint planning, ensured GMP compliance."
+          ]
+        },
+        {
+          "date": "2021.08 - 2023.05",
+          "role": "Software Engineer",
+          "company": "Suzhou Qijian Software",
+          "points": [
+            "Responsibilities: developed EAP system modules and ensured stable operation with accurate real-time MES data exchange."
+          ]
+        }
+      ]
+    },
+    "projects": {
+      "label": "Project Experience (Reverse Chronological)",
+      "items": [
+        {
+          "date": "2025.09 - Present",
+          "role": "Rongdi Intelligent MES/WMS Distributed Architecture Optimization",
+          "points": [
+            "Performance bottleneck resolution: reduced deadlocks during peak production by partitioned indexing and slow SQL refactoring; core API response improved by 30%.",
+            "High-reliability message center: built RabbitMQ-based async distribution with producer confirms and dead-letter queues for reliable notifications."
+          ]
+        },
+        {
+          "date": "2024.12 - 2025.08",
+          "role": "Changshu Yongqiang WMS Smart Warehouse Platform (0-1)",
+          "points": [
+            "Core architecture design: built WMS framework from scratch using DDD to decouple business logic and manage massive SKU volumes.",
+            "Delivery value: led 8-month delivery and rollout, improving inventory turnover by 20% and operational efficiency by 40%."
+          ]
+        },
+        {
+          "date": "2024.06 - 2024.11",
+          "role": "Wuxi Lead Intelligent WMS Logistics Scheduling Engine",
+          "points": [
+            "Decision algorithm: designed logistics pricing and routing strategy module, integrated major logistics APIs for multi-factor cost optimization.",
+            "SQL deep optimization: rewrote complex aggregations for million-row inventory logs using execution plan analysis, reducing reports to seconds."
+          ]
+        },
+        {
+          "date": "2024.02 - 2024.06",
+          "role": "Tianzhuchangyun Medical WMS Dynamic Label System",
+          "points": [
+            "Flexible architecture: created dynamic tree-structured packaging labels to meet strict medical device traceability requirements.",
+            "Algorithm implementation: recursive label hierarchy with dynamic front-end components, enabling infinite levels without secondary development."
+          ]
+        },
+        {
+          "date": "2023.10 - 2024.01",
+          "role": "Shenzhen Anbao Medical WMS & ERP Integration",
+          "points": [
+            "Frontend engineering: built modular responsive dashboards with Vue + Ant Design; higher-order components improved similar page delivery by 40%.",
+            "Data consistency: designed a highly available Web API integration layer with idempotency and distributed compensation to ensure real-time sync."
+          ]
+        },
+        {
+          "date": "2021.08 - 2023.05",
+          "role": "Nanrui Lianyan Semiconductor EAP Automation",
+          "points": [
+            "Industrial-grade communication: integrated equipment and system layers via SECS/GEM and OPC; custom monitoring enabled millisecond state awareness.",
+            "Mass data handling: streamed CSV test files with batch async ingestion to avoid OOM, improving throughput over 3x."
+          ]
+        }
+      ]
+    }
+  },
+  "contacts": {
+    "kicker": "Contacts",
+    "title": "Contacts",
+    "subtitle": "Feel free to reach out anytime for collaboration or opportunities.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "email": {
+      "label": "Email",
+      "value": "mr.yehan@outlook.com",
+      "href": "mailto:mr.yehan@outlook.com"
+    },
+    "phone": {
+      "label": "Phone",
+      "value": "+86 135 4797 7610",
+      "href": "tel:+8613547977610"
+    },
+    "github": {
+      "label": "GitHub",
+      "value": "fearlesshann",
+      "href": "https://github.com/fearlesshann"
+    }
   }
 }

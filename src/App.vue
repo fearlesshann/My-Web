@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <!-- 全屏过渡动画组件 -->
   <div name="fullscreen-fade">
     <div class="fullscreen-transition" ref="fullscreenEl"></div>
@@ -152,11 +152,133 @@
         </div>
       </div>
     </section>
-    <section class="my-blog section-column glass" id="my-blog"></section>
+    <section class="my-blog section-column glass" id="my-blog">
+      <div class="my-blog-head showup">
+        <p class="section-kicker">{{ experience.head.kicker }}</p>
+        <h2 class="section-title">{{ experience.head.title }}</h2>
+        <p class="section-subtitle">{{ experience.head.subtitle }}</p>
+      </div>
+      <div class="timeline-wrapper">
+        <div class="timeline-block showup">
+          <div class="timeline-block-title">
+            <span class="timeline-tag">{{ experience.work.label }}</span>
+          </div>
+          <div class="timeline-list">
+            <article
+              v-for="(item, index) in experience.work.items"
+              :key="`work-${index}`"
+              class="timeline-item reveal-card"
+            >
+              <span class="timeline-dot"></span>
+              <div class="timeline-card">
+                <div class="timeline-meta">
+                  <span class="timeline-date">{{ item.date }}</span>
+                  <span class="timeline-role">{{ item.role }}</span>
+                </div>
+                <h3 class="timeline-company">{{ item.company }}</h3>
+                <ul class="timeline-points">
+                  <li v-for="(point, pIndex) in item.points" :key="`work-point-${index}-${pIndex}`">
+                    {{ point }}
+                  </li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="timeline-block showup">
+          <div class="timeline-block-title">
+            <span class="timeline-tag">{{ experience.projects.label }}</span>
+          </div>
+          <div class="timeline-list">
+            <article
+              v-for="(item, index) in experience.projects.items"
+              :key="`project-${index}`"
+              class="timeline-item reveal-card"
+            >
+              <span class="timeline-dot"></span>
+              <div class="timeline-card">
+                <div class="timeline-meta">
+                  <span class="timeline-date">{{ item.date }}</span>
+                  <span class="timeline-role">{{ item.role }}</span>
+                </div>
+                <ul class="timeline-points">
+                  <li v-for="(point, pIndex) in item.points" :key="`project-point-${index}-${pIndex}`">
+                    {{ point }}
+                  </li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
     <section
       class="my-contacts section-column glass"
       id="my-contacts"
-    ></section>
+    >
+      <div class="my-contacts-head showup">
+        <p class="section-kicker">{{ $t("contacts.kicker") }}</p>
+        <h2 class="section-title">{{ $t("contacts.title") }}</h2>
+        <p class="section-subtitle">{{ $t("contacts.subtitle") }}</p>
+      </div>
+      <div class="contacts-grid showup">
+        <a class="contact-card" :href="$t('contacts.email.href')">
+          <span class="contact-icon-wrap">
+            <svg class="icon contact-icon" viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M63.125,9.977c-0.902-1.321-2.419-2.194-4.131-2.194H5.006c-1.676,0-3.158,0.842-4.067,2.117l31.16,25.982L63.125,9.977z"/>
+              <path d="M0.006,14.328v36.889c0,2.75,2.25,5,5,5h53.988c2.75,0,5-2.25,5-5V14.461L32.099,41.09L0.006,14.328z"/>
+            </svg>
+          </span>
+          <div class="contact-info">
+            <p class="contact-label">{{ $t("contacts.email.label") }}</p>
+            <p class="contact-value">{{ $t("contacts.email.value") }}</p>
+          </div>
+          <button
+            class="contact-copy"
+            type="button"
+            @click.stop.prevent="copyContact('email', $t('contacts.email.value'))"
+          >
+            {{ copiedKey === "email" ? $t("contacts.copied") : $t("contacts.copy") }}
+          </button>
+        </a>
+        <a class="contact-card" :href="$t('contacts.phone.href')">
+          <span class="contact-icon-wrap">
+            <svg class="icon contact-icon" viewBox="0 0 50 50" aria-hidden="true">
+              <path d="M 14 3.9902344 C 8.4886661 3.9902344 4 8.4789008 4 13.990234 L 4 35.990234 C 4 41.501568 8.4886661 45.990234 14 45.990234 L 36 45.990234 C 41.511334 45.990234 46 41.501568 46 35.990234 L 46 13.990234 C 46 8.4789008 41.511334 3.9902344 36 3.9902344 L 14 3.9902344 z M 18.005859 12.033203 C 18.633859 12.060203 19.210594 12.414031 19.558594 12.957031 C 19.954594 13.575031 20.569141 14.534156 21.369141 15.785156 C 22.099141 16.926156 22.150047 18.399844 21.498047 19.589844 L 20.033203 21.673828 C 19.637203 22.237828 19.558219 22.959703 19.824219 23.595703 C 20.238219 24.585703 21.040797 26.107203 22.466797 27.533203 C 23.892797 28.959203 25.414297 29.761781 26.404297 30.175781 C 27.040297 30.441781 27.762172 30.362797 28.326172 29.966797 L 30.410156 28.501953 C 31.600156 27.849953 33.073844 27.901859 34.214844 28.630859 C 35.465844 29.430859 36.424969 30.045406 37.042969 30.441406 C 37.585969 30.789406 37.939797 31.366141 37.966797 31.994141 C 38.120797 35.558141 35.359641 37.001953 34.556641 37.001953 C 34.000641 37.001953 27.316344 37.761656 19.777344 30.222656 C 12.238344 22.683656 12.998047 15.999359 12.998047 15.443359 C 12.998047 14.640359 14.441859 11.879203 18.005859 12.033203 z"/>
+            </svg>
+          </span>
+          <div class="contact-info">
+            <p class="contact-label">{{ $t("contacts.phone.label") }}</p>
+            <p class="contact-value">{{ $t("contacts.phone.value") }}</p>
+          </div>
+          <button
+            class="contact-copy"
+            type="button"
+            @click.stop.prevent="copyContact('phone', $t('contacts.phone.value'))"
+          >
+            {{ copiedKey === "phone" ? $t("contacts.copied") : $t("contacts.copy") }}
+          </button>
+        </a>
+        <a class="contact-card" target="_blank" :href="$t('contacts.github.href')">
+          <span class="contact-icon-wrap">
+            <svg class="icon contact-icon" viewBox="0 0 50 50" aria-hidden="true">
+              <path d="M17.791,46.836C18.502,46.53,19,45.823,19,45v-5.4c0-0.197,0.016-0.402,0.041-0.61C19.027,38.994,19.014,38.997,19,39 c0,0-3,0-3.6,0c-1.5,0-2.8-0.6-3.4-1.8c-0.7-1.3-1-3.5-2.8-4.7C8.9,32.3,9.1,32,9.7,32c0.6,0.1,1.9,0.9,2.7,2c0.9,1.1,1.8,2,3.4,2 c2.487,0,3.82-0.125,4.622-0.555C21.356,34.056,22.649,33,24,33v-0.025c-5.668-0.182-9.289-2.066-10.975-4.975 c-3.665,0.042-6.856,0.405-8.677,0.707c-0.058-0.327-0.108-0.656-0.151-0.987c1.797-0.296,4.843-0.647,8.345-0.714 c-0.112-0.276-0.209-0.559-0.291-0.849c-3.511-0.178-6.541-0.039-8.187,0.097c-0.02-0.332-0.047-0.663-0.051-0.999 c1.649-0.135,4.597-0.27,8.018-0.111c-0.079-0.5-0.13-1.011-0.13-1.543c0-1.7,0.6-3.5,1.7-5c-0.5-1.7-1.2-5.3,0.2-6.6 c2.7,0,4.6,1.3,5.5,2.1C21,13.4,22.9,13,25,13s4,0.4,5.6,1.1c0.9-0.8,2.8-2.1,5.5-2.1c1.5,1.4,0.7,5,0.2,6.6c1.1,1.5,1.7,3.2,1.6,5 c0,0.484-0.045,0.951-0.11,1.409c3.499-0.172,6.527-0.034,8.204,0.102c-0.002,0.337-0.033,0.666-0.051,0.999 c-1.671-0.138-4.775-0.28-8.359-0.089c-0.089,0.336-0.197,0.663-0.325,0.98c3.546,0.046,6.665,0.389,8.548,0.689 c-0.043,0.332-0.093,0.661-0.151,0.987c-1.912-0.306-5.171-0.664-8.879-0.682C35.112,30.873,31.557,32.75,26,32.969V33 c2.6,0,5,3.9,5,6.6V45c0,0.823,0.498,1.53,1.209,1.836C41.37,43.804,48,35.164,48,25C48,12.318,37.683,2,25,2S2,12.318,2,25 C2,35.164,8.63,43.804,17.791,46.836z"/>
+            </svg>
+          </span>
+          <div class="contact-info">
+            <p class="contact-label">{{ $t("contacts.github.label") }}</p>
+            <p class="contact-value">{{ $t("contacts.github.value") }}</p>
+          </div>
+          <button
+            class="contact-copy"
+            type="button"
+            @click.stop.prevent="copyContact('github', $t('contacts.github.href'))"
+          >
+            {{ copiedKey === "github" ? $t("contacts.copied") : $t("contacts.copy") }}
+          </button>
+        </a>
+      </div>
+    </section>
     <section class="footer section-column glass" id="footer">
       <p class="copyright">Copyright © {{ year }} by YeHan</p>
       <p class="copyright">All rights reserved.</p>
@@ -166,14 +288,27 @@
 
 <script setup>
 import LanguageSwitcher from "./components/LanguageSwitcher.vue";
-import { onMounted, onUnmounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 
 const fullscreenEl = ref(null);
 const year = new Date().getFullYear();
 const ex = new Date().getFullYear() - 2021;
-let observer;
 let startHandle;
+let revealHandler;
 const isMenuOpen = ref(false);
+const { tm } = useI18n();
+const emptyExperience = {
+  head: { kicker: "", title: "", subtitle: "" },
+  work: { label: "", items: [] },
+  projects: { label: "", items: [] },
+};
+const experience = computed(() => {
+  const data = tm("experience");
+  return data && typeof data === "object" ? data : emptyExperience;
+});
+const copiedKey = ref(null);
+let copiedTimer;
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -183,15 +318,26 @@ const closeMenu = () => {
   isMenuOpen.value = false;
 };
 
+const copyContact = async (key, value) => {
+  if (!value) return;
+  try {
+    await navigator.clipboard.writeText(value);
+    copiedKey.value = key;
+    if (copiedTimer) {
+      clearTimeout(copiedTimer);
+    }
+    copiedTimer = setTimeout(() => {
+      copiedKey.value = null;
+    }, 1500);
+  } catch (err) {
+    console.error("Copy failed", err);
+  }
+};
+
 
 // 组件挂载后执�?
 onMounted(() => {
-  // Defer observer setup to idle time.
-  if ("requestIdleCallback" in window) {
-    startHandle = window.requestIdleCallback(() => startScrollAnimation(), { timeout: 200 });
-  } else {
-    startHandle = window.setTimeout(() => startScrollAnimation(), 100);
-  }
+  startScrollAnimation();
   window.addEventListener("language-changed", handleLanguageChanged);
 });
 
@@ -205,8 +351,12 @@ onUnmounted(() => {
       window.clearTimeout(startHandle);
     }
   }
-  if (observer) {
-    observer.disconnect();
+  if (revealHandler) {
+    window.removeEventListener("scroll", revealHandler);
+    window.removeEventListener("resize", revealHandler);
+  }
+  if (copiedTimer) {
+    clearTimeout(copiedTimer);
   }
 });
 
@@ -223,34 +373,31 @@ const handleLanguageChanged = () => {
 // 滚动动画的主要函�?
 function startScrollAnimation() {
   // 1. 找到所有需要动画的元素
-  const elements = document.querySelectorAll(".showup");
+  const elements = document.querySelectorAll(".showup, .reveal-card");
   if (!elements.length) return;
+  let rafId = null;
+  const revealInView = () => {
+    elements.forEach((element) => {
+      if (element.classList.contains("reveal-visible")) return;
+      const rect = element.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight * 0.85 && rect.bottom > 0;
+      if (inView) {
+        element.classList.add("reveal-visible");
+      }
+    });
+  };
 
-  // Create observer.
-  observer = new IntersectionObserver(
-    // 当元素进入视窗时执行这个函数
-    (entries) => {
-      entries.forEach((entry) => {
-        // 如果元素出现在视窗里
-        if (entry.isIntersecting) {
-          // 给元素添加动画类，触发动�?
-          entry.target.classList.add("showup-animation");
-          // 动画播完一次后，就不再观察这个元素�?
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    // 观察器的配置
-    {
-      threshold: 0.5, // 元素10%进入视窗就触�?
-      rootMargin: "0px 0px -50px 0px", // 底部提前50像素触发
-    }
-  );
+  revealHandler = () => {
+    if (rafId) return;
+    rafId = requestAnimationFrame(() => {
+      revealInView();
+      rafId = null;
+    });
+  };
 
-  // 3. 开始观察每个元�?
-  elements.forEach((element) => {
-    observer.observe(element);
-  });
+  window.addEventListener("scroll", revealHandler, { passive: true });
+  window.addEventListener("resize", revealHandler);
+  revealInView();
 }
 </script>
 
@@ -683,13 +830,289 @@ h5,h3,p {
   fill: rgb(178, 13, 49) !important;
 }
 .my-blog {
-  height: 900px;
+  height: auto;
+  min-height: 100vh;
   background-color: rgba(39, 39, 39, 0.51);
+  padding: 80px 10%;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 32px;
+}
+
+.my-blog-head {
+  text-align: left;
+  width: 100%;
+}
+
+.section-kicker {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 0.85rem;
+  color: rgba(228, 228, 228, 0.6);
+  margin: 0 0 6px;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  margin: 0 0 8px;
+  color: rgb(228, 228, 228);
+}
+
+.section-subtitle {
+  margin: 0;
+  color: rgba(228, 228, 228, 0.75);
+  font-size: 1rem;
+}
+
+.timeline-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.timeline-block {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.timeline-block-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.timeline-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(178, 13, 49, 0.5);
+  color: rgb(228, 228, 228);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  background: rgba(178, 13, 49, 0.12);
+}
+
+.timeline-list {
+  position: relative;
+  padding-left: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.timeline-list::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    rgba(178, 13, 49, 0.65),
+    rgba(228, 228, 228, 0.05)
+  );
+}
+
+.timeline-item {
+  position: relative;
+  padding-left: 24px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 5px;
+  top: 12px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgb(178, 13, 49);
+  box-shadow: 0 0 18px rgba(178, 13, 49, 0.6);
+  border: 3px solid rgba(39, 39, 39, 0.85);
+}
+
+.timeline-card {
+  background: rgba(10, 10, 10, 0.45);
+  border: 1px solid rgba(228, 228, 228, 0.08);
+  border-radius: 16px;
+  padding: 20px 22px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  font-size: 0.95rem;
+  color: rgba(228, 228, 228, 0.7);
+  margin-bottom: 8px;
+}
+
+.timeline-date {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(228, 228, 228, 0.08);
+}
+
+.timeline-role {
+  color: rgba(228, 228, 228, 0.85);
+}
+
+.timeline-company {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  color: rgb(228, 228, 228);
+}
+
+.timeline-points {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+  color: rgba(228, 228, 228, 0.78);
+  line-height: 1.6;
+}
+
+.timeline-points li::marker {
+  color: rgb(178, 13, 49);
 }
 
 .my-contacts {
   height: 900px;
   background-color: rgba(204, 204, 204, 0.11);
+}
+
+.my-contacts {
+  height: auto;
+  min-height: 70vh;
+  padding: 80px 10%;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 32px;
+}
+
+.my-contacts-head {
+  text-align: left;
+  width: 100%;
+}
+
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: rgba(10, 10, 10, 0.45);
+  border: 1px solid rgba(228, 228, 228, 0.1);
+  text-decoration: none;
+  color: rgb(228, 228, 228);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(178, 13, 49, 0.5);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+}
+
+.contact-icon-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(178, 13, 49, 0.15);
+  border: 1px solid rgba(178, 13, 49, 0.3);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-label {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(228, 228, 228, 0.65);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.contact-value {
+  margin: 0;
+  font-size: 1rem;
+  color: rgb(228, 228, 228);
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.contact-copy {
+  border: 1px solid rgba(228, 228, 228, 0.2);
+  background: rgba(228, 228, 228, 0.08);
+  color: rgb(228, 228, 228);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.contact-copy:hover {
+  border-color: rgba(178, 13, 49, 0.6);
+  color: rgb(178, 13, 49);
+  background: rgba(178, 13, 49, 0.12);
+}
+
+@media (max-width: 980px) {
+  .contacts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .contacts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-card {
+    padding: 14px 16px;
+  }
+
+  .contact-copy {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .contact-label {
+    font-size: 0.8rem;
+  }
+
+  .contact-value {
+    font-size: 0.95rem;
+  }
 }
 
 .footer {
@@ -711,23 +1134,6 @@ h5,h3,p {
 }
 
 /*************************************** 装饰�?*****************************************/
-@keyframes showup {
-  0% {
-    opacity: 0;
-    top: 200px;
-  }
-
-  50% {
-    opacity: 1;
-    top: -30px;
-  }
-
-  100% {
-    opacity: 1;
-    top: 0;
-  }
-}
-
 @keyframes transition {
   0% {
     opacity: 0;
@@ -744,14 +1150,27 @@ h5,h3,p {
   }
 }
 
-.showup {
+.showup,
+.reveal-card {
   opacity: 0;
+  transform: translateY(16px);
+  will-change: transform, opacity;
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.showup-animation {
+.reveal-visible {
   opacity: 1;
-  animation: showup 0.8s;
-  position: relative;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .showup,
+  .reveal-card {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-visible {
+    transition: none;
+  }
 }
 
 .transition-animation {
@@ -873,6 +1292,26 @@ h5,h3,p {
     padding: 40px 8%;
   }
 
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .timeline-list {
+    padding-left: 28px;
+  }
+
+  .timeline-card {
+    padding: 18px;
+  }
+
+  .timeline-company {
+    font-size: 1.1rem;
+  }
+
   .footer {
     height: auto;
     padding: 20px 8%;
@@ -940,6 +1379,46 @@ h5,h3,p {
     padding: 28px 6%;
   }
 
+  .contact-card {
+    padding: 16px;
+  }
+
+  .contact-icon-wrap {
+    width: 46px;
+    height: 46px;
+  }
+
+  .contact-value {
+    font-size: 0.95rem;
+  }
+
+  .section-kicker {
+    letter-spacing: 3px;
+    font-size: 0.75rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .timeline-list {
+    padding-left: 22px;
+  }
+
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    left: 6px;
+  }
+
+  .timeline-card {
+    padding: 16px;
+  }
+
+  .timeline-meta {
+    font-size: 0.85rem;
+  }
+
   .my-skill-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -978,6 +1457,10 @@ h5,h3,p {
 
 }
 </style>
+
+
+
+
 
 
 
