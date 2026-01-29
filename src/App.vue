@@ -31,10 +31,10 @@
           <li @click="closeMenu"><LanguageSwitcher /></li>
         </ul>
       </nav>
-      <div class="main-title showup">
+      <LazyReveal tag="div" class="main-title">
         <h1 class="main-welcome">{{ $t("home.welcome") }}</h1>
-      </div>
-      <div class="main-contact showup">
+      </LazyReveal>
+      <LazyReveal tag="div" class="main-contact">
         <ul>
           <li>
             <a class="mail" href="mailto:mr.yehan@outlook.com">
@@ -63,10 +63,10 @@
             </a>
           </li>
         </ul>
-      </div>
-      <div class="main-job showup">
+      </LazyReveal>
+      <LazyReveal tag="div" class="main-job">
         <p>{{ $t("home.jobTitle") }}</p>
-      </div>
+      </LazyReveal>
       <!-- 向下滚动提示箭头 -->
       <div class="scroll-notice">
         <svg class="icon scroll-icon" viewBox="0 0 256 256" aria-hidden="true">
@@ -75,22 +75,24 @@
       </div>
     </section>
     <section class="about-me section-row glass" id="about-me">
-      <div class="my-picture showup">
+      <LazyReveal tag="div" class="my-picture">
         <picture>
           <source srcset="./assets/me.avif" type="image/avif" />
           <source srcset="./assets/me.webp" type="image/webp" />
           <img src="./assets/me.jpg" alt="YeHan" loading="lazy" decoding="async" />
         </picture>
-      </div>
-      <div class="my-introduction showup">
+      </LazyReveal>
+      <LazyReveal tag="div" class="my-introduction">
         <h5>{{ $t("home.info") }}</h5>
         <h5>{{ $t("home.info1") }}{{ ex }}{{ $t("home.info2") }}</h5>
         <h5>{{ $t("home.info3") }}</h5>
-      </div>
+      </LazyReveal>
     </section>
     <section class="my-skill section-column glass" id="my-skill">
-      <div class="my-skill-part showup"><p class="hardSkills">{{ $t("skills.hardSkills") }}</p></div>
-      <div class="my-skill-part showup my-skill-grid">
+      <LazyReveal tag="div" class="my-skill-part">
+        <p class="hardSkills">{{ $t("skills.hardSkills") }}</p>
+      </LazyReveal>
+      <LazyReveal tag="div" class="my-skill-part my-skill-grid">
         <div title="C#" class="skill-item">
           <svg class="skill-icon" aria-hidden="true">
             <use href="#icon-csharp"></use>
@@ -111,9 +113,11 @@
             <use href="#icon-vue"></use>
           </svg><h3 class="skill-name">{{ ex - 1 + '+ ' + $t("skills.years") }}</h3>
         </div>
-      </div>
-      <div class="my-skill-part showup"><p class="bonusSkills">{{ $t("skills.bonusSkills") }}</p></div>
-      <div class="my-skill-part showup my-skill-grid">
+      </LazyReveal>
+      <LazyReveal tag="div" class="my-skill-part">
+        <p class="bonusSkills">{{ $t("skills.bonusSkills") }}</p>
+      </LazyReveal>
+      <LazyReveal tag="div" class="my-skill-part my-skill-grid">
         <div class="skill-item">
           <svg class="skill-icon" aria-hidden="true"><use href="#icon-rabbitmq"></use></svg><h3 class="skill-name">{{ $t("skills.rabbitmq") }}</h3>
         </div>
@@ -150,64 +154,70 @@
         <div class="skill-item">
           <svg class="skill-icon" aria-hidden="true"><use href="#icon-unit-test"></use></svg><h3 class="skill-name">{{ $t("skills.unitTest") }}</h3>
         </div>
-      </div>
+      </LazyReveal>
     </section>
     <section class="my-blog section-column glass" id="my-blog">
-      <div class="my-blog-head showup">
+      <LazyReveal tag="div" class="my-blog-head">
         <p class="section-kicker">{{ experience.head.kicker }}</p>
         <h2 class="section-title">{{ experience.head.title }}</h2>
         <p class="section-subtitle">{{ experience.head.subtitle }}</p>
-      </div>
+      </LazyReveal>
       <div class="timeline-wrapper">
-        <div class="timeline-block showup">
+        <div class="timeline-block">
           <div class="timeline-block-title">
             <span class="timeline-tag">{{ experience.work.label }}</span>
           </div>
           <div class="timeline-list">
-            <article
+            <div
               v-for="(item, index) in experience.work.items"
               :key="`work-${index}`"
-              class="timeline-item reveal-card"
+              class="timeline-sentinel"
+              :ref="setLazyRef('work', index)"
             >
-              <span class="timeline-dot"></span>
-              <div class="timeline-card">
-                <div class="timeline-meta">
-                  <span class="timeline-date">{{ item.date }}</span>
-                  <span class="timeline-role">{{ item.role }}</span>
+              <article v-if="workVisible[index]" class="timeline-item showup-animation">
+                <span class="timeline-dot"></span>
+                <div class="timeline-card">
+                  <div class="timeline-meta">
+                    <span class="timeline-date">{{ item.date }}</span>
+                    <span class="timeline-role">{{ item.role }}</span>
+                  </div>
+                  <h3 class="timeline-company">{{ item.company }}</h3>
+                  <ul class="timeline-points">
+                    <li v-for="(point, pIndex) in item.points" :key="`work-point-${index}-${pIndex}`">
+                      {{ point }}
+                    </li>
+                  </ul>
                 </div>
-                <h3 class="timeline-company">{{ item.company }}</h3>
-                <ul class="timeline-points">
-                  <li v-for="(point, pIndex) in item.points" :key="`work-point-${index}-${pIndex}`">
-                    {{ point }}
-                  </li>
-                </ul>
-              </div>
-            </article>
+              </article>
+            </div>
           </div>
         </div>
-        <div class="timeline-block showup">
+        <div class="timeline-block">
           <div class="timeline-block-title">
             <span class="timeline-tag">{{ experience.projects.label }}</span>
           </div>
           <div class="timeline-list">
-            <article
+            <div
               v-for="(item, index) in experience.projects.items"
               :key="`project-${index}`"
-              class="timeline-item reveal-card"
+              class="timeline-sentinel"
+              :ref="setLazyRef('project', index)"
             >
-              <span class="timeline-dot"></span>
-              <div class="timeline-card">
-                <div class="timeline-meta">
-                  <span class="timeline-date">{{ item.date }}</span>
-                  <span class="timeline-role">{{ item.role }}</span>
+              <article v-if="projectVisible[index]" class="timeline-item showup-animation">
+                <span class="timeline-dot"></span>
+                <div class="timeline-card">
+                  <div class="timeline-meta">
+                    <span class="timeline-date">{{ item.date }}</span>
+                    <span class="timeline-role">{{ item.role }}</span>
+                  </div>
+                  <ul class="timeline-points">
+                    <li v-for="(point, pIndex) in item.points" :key="`project-point-${index}-${pIndex}`">
+                      {{ point }}
+                    </li>
+                  </ul>
                 </div>
-                <ul class="timeline-points">
-                  <li v-for="(point, pIndex) in item.points" :key="`project-point-${index}-${pIndex}`">
-                    {{ point }}
-                  </li>
-                </ul>
-              </div>
-            </article>
+              </article>
+            </div>
           </div>
         </div>
       </div>
@@ -216,12 +226,12 @@
       class="my-contacts section-column glass"
       id="my-contacts"
     >
-      <div class="my-contacts-head showup">
+      <LazyReveal tag="div" class="my-contacts-head">
         <p class="section-kicker">{{ $t("contacts.kicker") }}</p>
         <h2 class="section-title">{{ $t("contacts.title") }}</h2>
         <p class="section-subtitle">{{ $t("contacts.subtitle") }}</p>
-      </div>
-      <div class="contacts-grid showup">
+      </LazyReveal>
+      <LazyReveal tag="div" class="contacts-grid">
         <a class="contact-card" :href="$t('contacts.email.href')">
           <span class="contact-icon-wrap">
             <svg class="icon contact-icon" viewBox="0 0 64 64" aria-hidden="true">
@@ -277,7 +287,7 @@
             {{ copiedKey === "github" ? $t("contacts.copied") : $t("contacts.copy") }}
           </button>
         </a>
-      </div>
+      </LazyReveal>
     </section>
     <section class="footer section-column glass" id="footer">
       <p class="copyright">Copyright © {{ year }} by YeHan</p>
@@ -288,14 +298,14 @@
 
 <script setup>
 import LanguageSwitcher from "./components/LanguageSwitcher.vue";
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import LazyReveal from "./components/LazyReveal.vue";
+import { computed, nextTick, onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 const fullscreenEl = ref(null);
 const year = new Date().getFullYear();
 const ex = new Date().getFullYear() - 2021;
-let startHandle;
-let revealHandler;
+let lazyObserver;
 const isMenuOpen = ref(false);
 const { tm } = useI18n();
 const emptyExperience = {
@@ -307,6 +317,10 @@ const experience = computed(() => {
   const data = tm("experience");
   return data && typeof data === "object" ? data : emptyExperience;
 });
+const workVisible = ref([]);
+const projectVisible = ref([]);
+const workRefs = [];
+const projectRefs = [];
 const copiedKey = ref(null);
 let copiedTimer;
 
@@ -316,6 +330,64 @@ const toggleMenu = () => {
 
 const closeMenu = () => {
   isMenuOpen.value = false;
+};
+
+const setLazyRef = (type, index) => (el) => {
+  if (!el) return;
+  if (type === "work") {
+    workRefs[index] = el;
+  } else {
+    projectRefs[index] = el;
+  }
+};
+
+const initLazyExperience = () => {
+  const workItems = experience.value?.work?.items || [];
+  const projectItems = experience.value?.projects?.items || [];
+  workVisible.value = workItems.map(() => false);
+  projectVisible.value = projectItems.map(() => false);
+
+  if (lazyObserver) {
+    lazyObserver.disconnect();
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    workVisible.value = workItems.map(() => true);
+    projectVisible.value = projectItems.map(() => true);
+    return;
+  }
+
+  lazyObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const type = entry.target.dataset.type;
+        const index = Number(entry.target.dataset.index);
+        if (type === "work") {
+          workVisible.value[index] = true;
+        } else if (type === "project") {
+          projectVisible.value[index] = true;
+        }
+        lazyObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
+  );
+
+  nextTick(() => {
+    workRefs.forEach((el, index) => {
+      if (!el) return;
+      el.dataset.type = "work";
+      el.dataset.index = String(index);
+      lazyObserver.observe(el);
+    });
+    projectRefs.forEach((el, index) => {
+      if (!el) return;
+      el.dataset.type = "project";
+      el.dataset.index = String(index);
+      lazyObserver.observe(el);
+    });
+  });
 };
 
 const copyContact = async (key, value) => {
@@ -337,26 +409,18 @@ const copyContact = async (key, value) => {
 
 // 组件挂载后执�?
 onMounted(() => {
-  startScrollAnimation();
+  initLazyExperience();
   window.addEventListener("language-changed", handleLanguageChanged);
 });
 
 // 组件卸载时移除事件监听，防止内存泄漏
 onUnmounted(() => {
   window.removeEventListener("language-changed", handleLanguageChanged);
-  if (startHandle) {
-    if ("cancelIdleCallback" in window) {
-      window.cancelIdleCallback(startHandle);
-    } else {
-      window.clearTimeout(startHandle);
-    }
-  }
-  if (revealHandler) {
-    window.removeEventListener("scroll", revealHandler);
-    window.removeEventListener("resize", revealHandler);
-  }
   if (copiedTimer) {
     clearTimeout(copiedTimer);
+  }
+  if (lazyObserver) {
+    lazyObserver.disconnect();
   }
 });
 
@@ -368,37 +432,9 @@ const handleLanguageChanged = () => {
     if (!fullscreenEl.value) return;
     fullscreenEl.value.classList.remove("transition-animation");
   }, 1000);
+  initLazyExperience();
 };
 
-// 滚动动画的主要函�?
-function startScrollAnimation() {
-  // 1. 找到所有需要动画的元素
-  const elements = document.querySelectorAll(".showup, .reveal-card");
-  if (!elements.length) return;
-  let rafId = null;
-  const revealInView = () => {
-    elements.forEach((element) => {
-      if (element.classList.contains("reveal-visible")) return;
-      const rect = element.getBoundingClientRect();
-      const inView = rect.top < window.innerHeight * 0.85 && rect.bottom > 0;
-      if (inView) {
-        element.classList.add("reveal-visible");
-      }
-    });
-  };
-
-  revealHandler = () => {
-    if (rafId) return;
-    rafId = requestAnimationFrame(() => {
-      revealInView();
-      rafId = null;
-    });
-  };
-
-  window.addEventListener("scroll", revealHandler, { passive: true });
-  window.addEventListener("resize", revealHandler);
-  revealInView();
-}
 </script>
 
 <style scoped>
@@ -903,6 +939,11 @@ h5,h3,p {
   gap: 26px;
 }
 
+.timeline-sentinel {
+  position: relative;
+  min-height: 120px;
+}
+
 .timeline-list::before {
   content: "";
   position: absolute;
@@ -1133,7 +1174,26 @@ h5,h3,p {
   color: rgba(228, 228, 228, 0.753);
 }
 
-/*************************************** 装饰�?*****************************************/
+/**
+ * 动效
+ */
+@keyframes showup {
+  0% {
+    opacity: 0;
+    top: 200px;
+  }
+
+  50% {
+    opacity: 1;
+    top: -30px;
+  }
+
+  100% {
+    opacity: 1;
+    top: 0;
+  }
+}
+
 @keyframes transition {
   0% {
     opacity: 0;
@@ -1150,26 +1210,16 @@ h5,h3,p {
   }
 }
 
-.showup,
-.reveal-card {
-  opacity: 0;
-  transform: translateY(16px);
-  will-change: transform, opacity;
-  transition: opacity 0.6s ease, transform 0.6s ease;
+:deep(.showup-animation) {
+  opacity: 1;
+  animation: showup 0.8s;
+  position: relative;
 }
 
-.reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 @media (prefers-reduced-motion: reduce) {
-  .showup,
-  .reveal-card {
+  :deep(.showup-animation) {
     opacity: 1;
     transform: none;
-  }
-  .reveal-visible {
-    transition: none;
   }
 }
 
