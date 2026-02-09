@@ -281,7 +281,7 @@
     </section>
     <section class="footer section-column glass" id="footer">
       <p class="copyright">Copyright © {{ year }} by YeHan</p>
-      <p class="copyright">All rights reserved.</p>
+      <p class="copyright">All rights reserved.</p><a class="copyright" href="https://beian.mps.gov.cn/#/query/webSearch?code=32059002007564" rel="noreferrer" target="_blank"><img style="width: 15px;height: 15px;" src="/src/assets/备案图标.png" alt="">苏公网安备32059002007564号</a><a class="copyright" href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2026005340号</a>
     </section>
   </div>
 </template>
@@ -1118,6 +1118,9 @@ h5,h3,p {
 
 .copyright {
   color: rgba(228, 228, 228, 0.753);
+  text-decoration: none;
+  display: inline-block;
+  font-size: small;
 }
 
 /**
